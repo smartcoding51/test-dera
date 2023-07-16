@@ -9,7 +9,7 @@ This repo uses Hardhat framework for compilation, testing and deployment.
 - Create an enviroment file named `.env` (copy .env.example) and fill the next enviroment variables
 
 ```
-# The private key of a wallet address that will be used for deployment into the testnet or mainnet
+# Private key of a wallet address that will be used for deployment into the testnet or mainnet
 PRIVATE_KEY=
 
 # Env variable for gas report

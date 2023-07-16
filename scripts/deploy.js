@@ -7,22 +7,14 @@
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  // USDC token address for Goerli testnet
+  const USDC = "0x07865c6E87B9F70255377e024ace6630C1Eaa37F";
 
-  const lockedAmount = hre.ethers.parseEther("0.001");
+  const treasury = await hre.ethers.deployContract("Treasury", [USDC]);
 
-  const lock = await hre.ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
+  await treasury.waitForDeployment();
 
-  await lock.waitForDeployment();
-
-  console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
-  );
+  console.log(`Treasury deployed to ${treasury.target}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
